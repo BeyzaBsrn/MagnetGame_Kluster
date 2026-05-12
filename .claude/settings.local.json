@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Beyza\\\\MagnetGame_Kluster\" -MaxDepth 1 -File)",
-      "Bash(Select-Object Name)"
-    ]
-  }
-}
