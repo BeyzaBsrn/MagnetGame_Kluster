@@ -1,0 +1,4 @@
+repository "MagnetGame_Kluster/MagnetGame_Kluster@18968407607090@cloud"
+  path "/"
+    br "/main"
+    co "/main"
