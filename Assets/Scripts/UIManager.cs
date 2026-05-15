@@ -7,13 +7,22 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    // 4 oyuncunun renkleri: Sarı, Kırmızı, Mavi, Yeşil
+    // 4 oyuncunun yazı renkleri (sıra göstergesi için)
     private static readonly Color[] oyuncuRenkleri =
     {
-        new Color(1f, 0.9f,  0f,  1f),
-        new Color(1f, 0.3f,  0.3f,1f),
-        new Color(0.3f,0.6f, 1f,  1f),
-        new Color(0.3f,1f,   0.4f,1f),
+        new Color(1f,   0.9f, 0f,   1f),   // Sarı   (P1)
+        new Color(1f,   0.3f, 0.3f, 1f),   // Kırmızı(P2)
+        new Color(0.3f, 1f,   0.4f, 1f),   // Yeşil  (P3)
+        new Color(0.8f, 0.3f, 1f,   1f),   // Mor    (P4)
+    };
+
+    // 4 oyuncunun panel arka plan renkleri
+    private static readonly Color[] panelRenkleri =
+    {
+        new Color(0.1f, 0.6f, 0.7f, 1f),   // Camgöbeği (P1 - sol)
+        new Color(0.7f, 0.1f, 0.1f, 1f),   // Kırmızı   (P2 - sağ)
+        new Color(0.1f, 0.55f, 0.1f, 1f),  // Yeşil     (P3 - üst)
+        new Color(0.45f, 0.1f, 0.6f, 1f),  // Mor       (P4 - alt)
     };
 
     [Header("Paneller")]
@@ -114,11 +123,17 @@ public class UIManager : MonoBehaviour
         // Oyuncu listesi henüz sync olmadıysa erken çık — ArayuzuGuncelle düzeltir
         if (sayisi == 0) return;
 
-        // Sadece oynayan oyuncuların paneli aktif olsun
+        // Sadece oynayan oyuncuların paneli aktif olsun + rengini ayarla
         for (int i = 0; i < playerPanels.Length; i++)
         {
             if (playerPanels[i] != null)
+            {
                 playerPanels[i].SetActive(i < sayisi);
+                // Panel arka plan rengini oyuncuya göre ayarla
+                Image panelImage = playerPanels[i].GetComponent<Image>();
+                if (panelImage != null)
+                    panelImage.color = panelRenkleri[i % panelRenkleri.Length];
+            }
         }
 
         for (int i = 0; i < sayisi; i++)
@@ -143,7 +158,12 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < playerPanels.Length; i++)
         {
             if (playerPanels[i] != null)
+            {
                 playerPanels[i].SetActive(i < sayisi);
+                Image panelImage = playerPanels[i].GetComponent<Image>();
+                if (panelImage != null)
+                    panelImage.color = panelRenkleri[i % panelRenkleri.Length];
+            }
         }
 
         for (int i = 0; i < sayisi; i++)
